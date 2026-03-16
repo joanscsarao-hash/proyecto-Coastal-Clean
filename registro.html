@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoastalClean - Hazte Voluntario</title>
+    <style>
+        /* Estilos Globales */
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #0b1e36; color: white; padding-bottom: 40px; transition: background 0.5s ease; }
+        
+        /* Menú Maestro */
+        nav { display: flex; align-items: center; padding: 20px 50px; border-bottom: 1px solid #1c3a5e; background: #0b1e36; z-index: 1001; }
+        .logo { font-weight: bold; color: #00d4ff; margin-right: 40px; font-size: 1.2rem; }
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-size: 0.9rem; }
+        nav a.active { color: #00d4ff !important; border-bottom: 2px solid #00d4ff; padding-bottom: 4px; font-weight: bold; }
+        .btn-cta { background: #00d4ff; color: #0b1e36; padding: 8px 20px; border-radius: 20px; font-weight: bold; margin-left: auto; }
+
+        /* Contenedor del formulario */
+        .main-container { display: flex; justify-content: center; padding: 40px 20px; }
+        .form-card { background: #162a4a; padding: 40px; border-radius: 20px; border: 1px solid #284c75; width: 100%; max-width: 500px; text-align: center; }
+        h1 { margin-bottom: 10px; }
+        p { color: #a0c0e0; margin-bottom: 30px; }
+        
+        /* Estilo de inputs */
+        .form-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left; }
+        label { font-size: 0.8rem; display: block; margin-bottom: 5px; color: #7a94b3; }
+        input, select, textarea { width: 100%; padding: 12px; background: #0b1e36; border: 1px solid #284c75; border-radius: 8px; color: white; box-sizing: border-box; margin-bottom: 15px; }
+        
+        /* Botón */
+        .btn-submit { background: #00d4ff; color: #0b1e36; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .btn-submit:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">CoastalClean</div>
+        <a href="index.html">Inicio</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="articulos.html">Artículos</a>
+        <a href="registro.html" class="active">Voluntarios</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="registro.html" class="btn-cta">Únete Ahora</a>
+    </nav>
+
+    <div class="main-container">
+        <div class="form-card">
+            <h1>Hazte Voluntario</h1>
+            <p>Completa el formulario para unirte a una brigada de limpieza</p>
+            
+            <form id="registroForm">
+                <div class="form-group">
+                    <div>
+                        <label>Nombre Completo *</label>
+                        <input type="text" id="nombre" placeholder="Tu nombre" required>
+                    </div>
+                    <div>
+                        <label>Email *</label>
+                        <input type="email" placeholder="@email.com" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div>
+                        <label>Teléfono</label>
+                        <input type="text" id="telefono" placeholder="+54 600 000 000">
+                    </div>
+                    <div>
+                        <label>Ciudad *</label>
+                        <input type="text" placeholder="Tu ciudad" required>
+                    </div>
+                </div>
+
+                <label>Experiencia</label>
+                <select>
+                    <option>Sin experiencia</option>
+                    <option>Con experiencia previa</option>
+                </select>
+
+                <label>Disponibilidad</label>
+                <select>
+                    <option>Fines de semana</option>
+                    <option>Días de semana</option>
+                </select>
+
+                <label>¿Por qué quieres participar?</label>
+                <textarea rows="3" placeholder="Cuéntanos tu motivación..."></textarea>
+
+                <button type="submit" class="btn-submit">Registrarme</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registroForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('nombre').value.toLowerCase();
+            const tel = document.getElementById('telefono').value;
+
+            if (nombre === 'ado' && tel === '231020') {
+                document.body.style.backgroundImage = "url('image_0fd443.jpg')";
+                document.body.style.backgroundSize = "cover";
+                document.body.style.backgroundPosition = "center";
+                document.body.style.backgroundAttachment = "fixed";
+                alert('¡Debut activado!');
+            } else {
+                alert('Registro enviado con éxito.');
+            }
+        });
+    </script>
+</body>
+</html>
