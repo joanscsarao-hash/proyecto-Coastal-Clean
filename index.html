@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoastalClean - Inicio</title>
     <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #0b1e36; color: white; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #0b1e36; color: white; overflow-x: hidden; }
         
         /* Menú Maestro */
         nav { display: flex; align-items: center; padding: 20px 50px; border-bottom: 1px solid #1c3a5e; background: #0b1e36; }
@@ -14,7 +14,24 @@
         nav a.active { color: #00d4ff !important; border-bottom: 2px solid #00d4ff; padding-bottom: 4px; font-weight: bold; }
         .btn-cta { background: #00d4ff; color: #0b1e36; padding: 8px 20px; border-radius: 20px; font-weight: bold; margin-left: auto; }
 
-        /* Estilos */
+        /* --- ESTILOS DE LA MARQUESINA --- */
+        #marquee-container {
+            background: #162a4a; 
+            color: #00d4ff; 
+            overflow: hidden; 
+            white-space: nowrap; 
+            padding: 10px 0; 
+            border-bottom: 1px solid #1c3a5e;
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        #marquee-text {
+            display: inline-block;
+            will-change: transform;
+        }
+
+        /* Estilos del contenido */
         .hero { text-align: center; padding: 80px 20px; }
         h1 { font-size: 3.5rem; margin-bottom: 10px; }
         .highlight { color: #00d4ff; }
@@ -35,22 +52,11 @@
         <a href="nosotros.html">Nosotros</a>
         <a href="registro.html" class="btn-cta">Únete Ahora</a>
     </nav>
-/* --- ESTILOS DE LA MARQUESINA --- */
-        #marquee-container {
-            background: #162a4a; 
-            color: #00d4ff; 
-            overflow: hidden; 
-            white-space: nowrap; 
-            padding: 10px 0; 
-            border-bottom: 1px solid #1c3a5e;
-            font-size: 0.9rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        #marquee-text {
-            display: inline-block;
-            will-change: transform;
-        }
+
+    <div id="marquee-container">
+        <div id="marquee-text"></div>
+    </div>
+
     <section class="hero">
         <h1>Salvemos nuestros <br> <span class="highlight">océanos juntos</span></h1>
         <p>Cada año, 8 millones de toneladas de plástico terminan en el océano.</p>
@@ -85,5 +91,33 @@
         Protegiendo nuestros océanos, una playa a la vez. © 2026
     </footer>
 
+    <script>
+        const textoMarquesina = "¡BIENVENIDO A COASTALCLEAN! • PRÓXIMA LIMPIEZA: PLAYA DZITYÁ - MAYO 2026 • ÚNETE A NUESTROS 4 VOLUNTARIOS ACTIVOS • SALVEMOS EL OCÉANO JUNTOS • ";
+        const elContainer = document.getElementById("marquee-text");
+        
+        // Repetimos el texto para que no haya huecos vacíos
+        elContainer.innerText = textoMarquesina.repeat(5);
+
+        let xPos = 0;
+        const speed = 1.2; // Velocidad de la marquesina
+
+        function animar() {
+            xPos -= speed;
+            
+            // Reinicio suave de la posición
+            if (Math.abs(xPos) >= elContainer.scrollWidth / 5) {
+                xPos = 0;
+            }
+            
+            elContainer.style.transform = `translateX(${xPos}px)`;
+            requestAnimationFrame(animar);
+        }
+
+        // Iniciar animación
+        animar();
+    </script>
+
+</body>
+</html>
 </body>
 </html>
