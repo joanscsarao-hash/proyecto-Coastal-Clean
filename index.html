@@ -40,47 +40,6 @@
         .cta-section { background: #00d4ff; color: #0b1e36; padding: 60px; text-align: center; border-radius: 20px; margin: 40px; }
         footer { padding: 40px; text-align: center; font-size: 0.8rem; color: #7a94b3; border-top: 1px solid #1c3a5e; }
     </style>
-    <script> 
-const toggleBtn = document.createElement("button");
-toggleBtn.innerHTML = "🌙";
-toggleBtn.style.position = "fixed";
-toggleBtn.style.bottom = "20px";
-toggleBtn.style.right = "20px";
-toggleBtn.style.padding = "10px";
-toggleBtn.style.borderRadius = "50%";
-toggleBtn.style.border = "none";
-toggleBtn.style.cursor = "pointer";
-toggleBtn.style.fontSize = "20px";
-toggleBtn.style.boxShadow = "0 0 10px rgba(0,0,0,0.5)";
-toggleBtn.style.zIndex = "1000";
-document.body.appendChild(toggleBtn);
-
-// Obtener estado guardado
-let modoClaro = localStorage.getItem("modoClaro") === "true";
-
-// Función para aplicar modo
-function aplicarModo() {
-  if (modoClaro) {
-    document.body.style.backgroundColor = "#ffffff";
-    document.body.style.color = "#000000";
-    toggleBtn.innerHTML = "☀️";
-  } else {
-    document.body.style.backgroundColor = "#0b1e36";
-    document.body.style.color = "#ffffff";
-    toggleBtn.innerHTML = "🌙";
-  }
-}
-
-// Aplicar al cargar
-aplicarModo();
-
-// Evento del botón
-toggleBtn.addEventListener("click", () => {
-  modoClaro = !modoClaro;
-  localStorage.setItem("modoClaro", modoClaro);
-  aplicarModo();
-});
-</script>
 </head>
 <body>
 
