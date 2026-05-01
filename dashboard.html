@@ -24,6 +24,7 @@
             margin-bottom: 20px;
         }
 
+        /* Menú Maestro */
         nav {
             display: flex;
             align-items: center;
@@ -62,6 +63,7 @@
             margin-left: auto;
         }
 
+        /* Contenido */
         .main-container {
             padding: 20px 50px;
         }
@@ -103,133 +105,100 @@
             font-size: 0.8rem;
             font-weight: bold;
         }
-
-        /* 🔥 NUEVO: mini gráfica */
-        .mini-chart {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 220px;
-            height: 220px;
-            background: #162a4a;
-            padding: 10px;
-            border-radius: 15px;
-            border: 1px solid #284c75;
-        }
     </style>
 </head>
 
 <body>
 
-<nav>
-    <div class="logo">CoastalClean</div>
-    <a href="index.html">Inicio</a>
-    <a href="dashboard.html" class="active">Dashboard</a>
-    <a href="articulos.html">Artículos</a>
-    <a href="registro.html">Voluntarios</a>
-    <a href="nosotros.html">Nosotros</a>
-    <a href="registro.html" class="btn-cta">Únete Ahora</a>
-</nav>
+    <nav>
+        <div class="logo">CoastalClean</div>
+        <a href="index.html">Inicio</a>
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="articulos.html">Artículos</a>
+        <a href="registro.html">Voluntarios</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="registro.html" class="btn-cta">Únete Ahora</a>
+    </nav>
 
-<div class="main-container">
-    <h2>Panel de Progreso</h2>
+    <div class="main-container">
+        <h2>Panel de Progreso</h2>
 
-    <div class="stats-grid">
-        <div class="card">Total Recolectado<br><strong>0 kg</strong></div>
-
-        <!-- 🔥 CAMBIO: id agregado -->
-        <div class="card">Voluntarios<br><strong id="totalVol">4</strong></div>
-
-        <div class="card">Limpiezas<br><strong>0</strong></div>
-        <div class="card">Área Limpiada<br><strong>0 m²</strong></div>
-    </div>
-
-    <div class="charts-container">
-        <div class="card">
-            <canvas id="barChart"></canvas>
+        <div class="stats-grid">
+            <div class="card">Total Recolectado<br><strong>0 kg</strong></div>
+            <div class="card">Voluntarios<br><strong>4</strong></div>
+            <div class="card">Limpiezas<br><strong>0</strong></div>
+            <div class="card">Área Limpiada<br><strong>0 m²</strong></div>
         </div>
+
+        <div class="charts-container">
+            <div class="card">
+                <canvas id="barChart"></canvas>
+            </div>
+            <div class="card">
+                <canvas id="doughnutChart"></canvas>
+            </div>
+        </div>
+
         <div class="card">
-            <canvas id="doughnutChart"></canvas>
+            <h3>Historial de Eventos</h3>
+            <table>
+                <tr>
+                    <th>EVENTO</th>
+                    <th>FECHA</th>
+                    <th>RECOLECCIÓN</th>
+                    <th>ESTADO</th>
+                </tr>
+                <tr>
+                    <td>Limpieza Delta del Ebro</td>
+                    <td>4 abril 2026</td>
+                    <td>0 kg</td>
+                    <td><span class="status-pill" style="background:#00d4ff; color:#0b1e36;">En proceso</span></td>
+                </tr>
+                <tr>
+                    <td>Jornada Islas Baleares</td>
+                    <td>21 mayo 2026</td>
+                    <td>0 kg</td>
+                    <td><span class="status-pill" style="background:#00d4ff; color:#0b1e36;">En proceso</span></td>
+                </tr>
+                <tr>
+                    <td>Rescate Costas Asturianas</td>
+                    <td>28 junio 2026</td>
+                    <td>0 kg</td>
+                    <td><span class="status-pill" style="background:#00d4ff; color:#0b1e36;">En proceso</span></td>
+                </tr>
+            </table>
         </div>
     </div>
 
-    <div class="card">
-        <h3>Historial de Eventos</h3>
-        <table>
-            <tr>
-                <th>EVENTO</th>
-                <th>FECHA</th>
-                <th>RECOLECCIÓN</th>
-                <th>ESTADO</th>
-            </tr>
-            <tr>
-                <td>Limpieza Delta del Ebro</td>
-                <td>4 abril 2026</td>
-                <td>0 kg</td>
-                <td><span class="status-pill" style="background:#00d4ff; color:#0b1e36;">En proceso</span></td>
-            </tr>
-        </table>
-    </div>
-</div>
+    <script>
+        new Chart(document.getElementById('barChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Playa', 'Costa', 'Bahía', 'Costas'],
+                datasets: [{
+                    data: [250, 400, 335, 200],
+                    backgroundColor: '#00d4ff'
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
 
-<!-- 🔥 NUEVO: mini gráfica -->
-<div class="mini-chart">
-    <canvas id="miniGrafica"></canvas>
-</div>
-
-<script>
-    // 🔥 NUEVO: obtener datos reales
-    let datos = JSON.parse(localStorage.getItem('voluntarios')) || {
-        total: 4,
-        ciudades: {}
-    };
-
-    // 🔥 actualizar número
-    document.getElementById('totalVol').innerText = datos.total;
-
-    // 🔥 datos gráfica mini
-    const ciudades = Object.keys(datos.ciudades);
-    const cantidades = Object.values(datos.ciudades);
-
-    if (ciudades.length === 0) {
-        ciudades.push("Sin datos");
-        cantidades.push(1);
-    }
-
-    new Chart(document.getElementById('miniGrafica'), {
-        type: 'doughnut',
-        data: {
-            labels: ciudades,
-            datasets: [{
-                data: cantidades,
-                backgroundColor: ['#00d4ff','#1dd1a1','#ff9f43','#a29bfe','#ff6b6b']
-            }]
-        }
-    });
-
-    // TU CÓDIGO ORIGINAL (NO TOCADO)
-    new Chart(document.getElementById('barChart'), {
-        type: 'bar',
-        data: {
-            labels: ['Playa', 'Costa', 'Bahía', 'Costas'],
-            datasets: [{
-                data: [250, 400, 335, 200],
-                backgroundColor: '#00d4ff'
-            }]
-        }
-    });
-
-    new Chart(document.getElementById('doughnutChart'), {
-        type: 'doughnut',
-        data: {
-            labels: ['Plásticos', 'Micro', 'Org', 'Otros'],
-            datasets: [{
-                data: [485, 140, 205, 155],
-                backgroundColor: ['#00d4ff', '#ff9f43', '#1dd1a1', '#a29bfe']
-            }]
-        }
-    });
-</script>
+        new Chart(document.getElementById('doughnutChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Plásticos', 'Micro', 'Org', 'Otros'],
+                datasets: [{
+                    data: [485, 140, 205, 155],
+                    backgroundColor: ['#00d4ff', '#ff9f43', '#1dd1a1', '#a29bfe']
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
 
 </body>
 </html>
