@@ -142,7 +142,7 @@
     <div style="display: flex; justify-content: center; gap: 20px; margin-top: 30px; flex-wrap: wrap;">
         <div class="card"><strong>0</strong> Kg Recolectados</div>
 
-        <!-- CAMBIO IMPORTANTE -->
+        <!-- AQUÍ ESTÁ EL CAMBIO -->
         <div class="card"><strong id="voluntariosIndex">4</strong> Voluntarios</div>
 
         <div class="card"><strong>0</strong> Limpiezas</div>
@@ -175,7 +175,7 @@
 </footer>
 
 <script>
-    // MARQUESINA
+    // MARQUESINA (tu código intacto)
     const textoMarquesina = "¡BIENVENIDO A COASTALCLEAN! • PRÓXIMA LIMPIEZA: PLAYA DZITYÁ - MAYO 2026 • ÚNETE A NUESTROS VOLUNTARIOS • SALVEMOS EL OCÉANO JUNTOS • ";
     const elContainer = document.getElementById("marquee-text");
 
@@ -197,11 +197,12 @@
 
     animar();
 
-    // VOLUNTARIOS DINÁMICOS
+    // CONTADOR DINÁMICO (esto es lo nuevo)
     let voluntarios = localStorage.getItem('voluntarios');
 
-    if (!voluntarios) {
+    if (voluntarios === null) {
         voluntarios = 4;
+        localStorage.setItem('voluntarios', voluntarios);
     }
 
     document.getElementById('voluntariosIndex').innerText = voluntarios;
