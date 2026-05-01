@@ -52,6 +52,18 @@
     <div id="m4" class="modal"><div class="modal-content"><span class="close" onclick="this.parentElement.parentElement.style.display='none'">&times;</span><h2>Tecnología</h2><p>La innovación al servicio del océano:</p><ul><li><strong>The Ocean Cleanup:</strong> Barreras flotantes para concentrar plásticos.</li><li><strong>Drones submarinos:</strong> IA para recoger residuos del fondo.</li><li><strong>Interceptores fluviales:</strong> Atrapan plástico antes de llegar al mar.</li><li><strong>Bioplásticos:</strong> Materiales que se descomponen rápido.</li></ul></div></div>
     
     <div id="m5" class="modal"><div class="modal-content"><span class="close" onclick="this.parentElement.parentElement.style.display='none'">&times;</span><h2>Legislación</h2><p>El panorama legislativo global:</p><ul><li><strong>Unión Europea:</strong> Directiva SUP prohíbe plásticos de un solo uso.</li><li><strong>Tratado Global:</strong> Negociaciones de la ONU para 2040.</li><li><strong>REP:</strong> Responsabilidad Extendida del Productor.</li></ul><p>Necesitamos medidas más ambiciosas y un cambio cultural.</p></div></div>
+<script>
+document.addEventListener("keydown",(e)=>{
+if(e.key==="Escape"){
+document.querySelectorAll(".modal").forEach(m=>m.style.display="none");
+}
+});
 
+document.querySelectorAll(".modal").forEach(modal=>{
+modal.addEventListener("click",(e)=>{
+if(e.target===modal){modal.style.display="none";}
+});
+});
+</script>
 </body>
 </html>
