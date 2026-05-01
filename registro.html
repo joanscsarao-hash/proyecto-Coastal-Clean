@@ -69,17 +69,17 @@
 document.getElementById('registroForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
+    // Obtener valor actual (inicia en 4 si no existe)
     let voluntarios = localStorage.getItem('voluntarios');
+    voluntarios = voluntarios ? parseInt(voluntarios) : 4;
 
-    if (!voluntarios) {
-        voluntarios = 0;
-    }
+    // Sumar 1
+    voluntarios++;
 
-    voluntarios = parseInt(voluntarios) + 1;
-
+    // Guardar
     localStorage.setItem('voluntarios', voluntarios);
 
-    alert('Registro exitoso. Total voluntarios: ' + voluntarios);
+    alert('Registro enviado. Total de voluntarios: ' + voluntarios);
 
     this.reset();
 });
