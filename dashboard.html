@@ -13,36 +13,19 @@
             font-family: 'Segoe UI', sans-serif;
             background-color: #0b1e36;
             color: white;
-            padding-bottom: 40px;
         }
 
         nav {
             display: flex;
-            align-items: center;
             padding: 20px 50px;
             border-bottom: 1px solid #1c3a5e;
         }
 
-        .logo {
-            font-weight: bold;
-            color: #00d4ff;
-            margin-right: 40px;
-        }
+        .logo { color: #00d4ff; margin-right: 40px; }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-        }
+        nav a { color: white; margin: 0 15px; text-decoration: none; }
 
-        nav a.active {
-            color: #00d4ff;
-            border-bottom: 2px solid #00d4ff;
-        }
-
-        .main-container {
-            padding: 20px 50px;
-        }
+        .main-container { padding: 20px 50px; }
 
         .card {
             background: #162a4a;
@@ -57,10 +40,17 @@
             gap: 20px;
         }
 
-        canvas {
+        /* 🔥 mini grafica esquina */
+        .mini-chart {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 250px;
+            height: 250px;
             background: #162a4a;
-            padding: 20px;
-            border-radius: 12px;
+            padding: 10px;
+            border-radius: 15px;
+            border: 1px solid #284c75;
         }
     </style>
 </head>
@@ -70,69 +60,58 @@
 <nav>
     <div class="logo">CoastalClean</div>
     <a href="index.html">Inicio</a>
-    <a href="dashboard.html" class="active">Dashboard</a>
+    <a href="dashboard.html">Dashboard</a>
     <a href="articulos.html">Artículos</a>
     <a href="registro.html">Voluntarios</a>
     <a href="nosotros.html">Nosotros</a>
 </nav>
 
 <div class="main-container">
+
     <h2>Panel de Progreso</h2>
 
     <div class="stats-grid">
         <div class="card">Total Recolectado<br><strong>0 kg</strong></div>
-        <div class="card">Voluntarios<br><strong id="totalVoluntarios">0</strong></div>
+        <div class="card">Voluntarios<br><strong id="totalVol">0</strong></div>
         <div class="card">Limpiezas<br><strong>0</strong></div>
         <div class="card">Área Limpiada<br><strong>0 m²</strong></div>
     </div>
 
-    <div class="card">
-        <h3>Voluntarios por ciudad</h3>
-        <canvas id="graficaCiudades"></canvas>
-    </div>
+</div>
+
+<!-- 🔥 grafica pequeña -->
+<div class="mini-chart">
+    <canvas id="miniGrafica"></canvas>
 </div>
 
 <script>
-    // Obtener datos guardados
-    let datos = JSON.parse(localStorage.getItem('voluntarios')) || {
-        total: 4,
-        ciudades: {}
-    };
+let datos = JSON.parse(localStorage.getItem('voluntarios')) || {
+    total: 4,
+    ciudades: {}
+};
 
-    // Mostrar total
-    document.getElementById('totalVoluntarios').innerText = datos.total;
+document.getElementById('totalVol').innerText = datos.total;
 
-    // Preparar datos para gráfica
-    const ciudades = Object.keys(datos.ciudades);
-    const cantidades = Object.values(datos.ciudades);
+const ciudades = Object.keys(datos.ciudades);
+const cantidades = Object.values(datos.ciudades);
 
-    // Si no hay datos aún
-    if (ciudades.length === 0) {
-        ciudades.push("Sin datos");
-        cantidades.push(0);
+if (ciudades.length === 0) {
+    ciudades.push("Sin datos");
+    cantidades.push(1);
+}
+
+new Chart(document.getElementById('miniGrafica'), {
+    type: 'doughnut',
+    data: {
+        labels: ciudades,
+        datasets: [{
+            data: cantidades,
+            backgroundColor: [
+                '#00d4ff','#1dd1a1','#ff9f43','#a29bfe','#ff6b6b'
+            ]
+        }]
     }
-
-    new Chart(document.getElementById('graficaCiudades'), {
-        type: 'doughnut',
-        data: {
-            labels: ciudades,
-            datasets: [{
-                data: cantidades,
-                backgroundColor: [
-                    '#00d4ff',
-                    '#1dd1a1',
-                    '#ff9f43',
-                    '#a29bfe',
-                    '#ff6b6b',
-                    '#48dbfb',
-                    '#feca57'
-                ]
-            }]
-        },
-        options: {
-            responsive: true
-        }
-    });
+});
 </script>
 
 </body>
