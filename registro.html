@@ -4,31 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoastalClean - Hazte Voluntario</title>
+
     <style>
         body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #0b1e36; color: white; padding-bottom: 40px; }
-        nav { display: flex; align-items: center; padding: 20px 50px; border-bottom: 1px solid #1c3a5e; background: #0b1e36; }
+
+        nav { display: flex; align-items: center; padding: 20px 50px; border-bottom: 1px solid #1c3a5e; }
         .logo { font-weight: bold; color: #00d4ff; margin-right: 40px; }
         nav a { color: white; text-decoration: none; margin: 0 15px; }
-        nav a.active { color: #00d4ff; border-bottom: 2px solid #00d4ff; }
         .btn-cta { background: #00d4ff; color: #0b1e36; padding: 8px 20px; border-radius: 20px; margin-left: auto; }
 
-        .main-container { display: flex; justify-content: center; padding: 40px; }
-        .form-card { background: #162a4a; padding: 40px; border-radius: 20px; width: 400px; }
+        .main-container { display: flex; justify-content: center; padding: 40px 20px; }
+        .form-card { background: #162a4a; padding: 40px; border-radius: 20px; width: 100%; max-width: 500px; }
 
         input, select, textarea {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
+            padding: 12px;
+            margin-bottom: 15px;
             background: #0b1e36;
             border: 1px solid #284c75;
             color: white;
+            border-radius: 8px;
         }
 
-        button {
-            width: 100%;
-            padding: 12px;
+        .btn-submit {
             background: #00d4ff;
+            color: #0b1e36;
+            padding: 15px;
+            width: 100%;
             border: none;
+            border-radius: 10px;
             font-weight: bold;
             cursor: pointer;
         }
@@ -42,25 +46,36 @@
     <a href="index.html">Inicio</a>
     <a href="dashboard.html">Dashboard</a>
     <a href="articulos.html">Artículos</a>
-    <a href="registro.html" class="active">Voluntarios</a>
+    <a href="registro.html">Voluntarios</a>
     <a href="nosotros.html">Nosotros</a>
+    <a href="registro.html" class="btn-cta">Únete</a>
 </nav>
 
 <div class="main-container">
     <div class="form-card">
-        <h2>Hazte Voluntario</h2>
+        <h1>Hazte Voluntario</h1>
 
         <form id="registroForm">
             <input type="text" id="nombre" placeholder="Nombre" required>
             <input type="email" placeholder="Email" required>
-            <input type="text" id="telefono" placeholder="Teléfono">
+
+            <select id="ciudad" required>
+                <option value="">Selecciona tu ciudad</option>
+                <option>Ciudad de México</option>
+                <option>Guadalajara</option>
+                <option>Monterrey</option>
+                <option>Mérida</option>
+                <option>Cancún</option>
+                <option>Tijuana</option>
+                <option>Puebla</option>
+            </select>
 
             <select>
                 <option>Sin experiencia</option>
                 <option>Con experiencia</option>
             </select>
 
-            <button type="submit">Registrarme</button>
+            <button type="submit" class="btn-submit">Registrarme</button>
         </form>
     </div>
 </div>
@@ -69,19 +84,30 @@
 document.getElementById('registroForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Obtener valor actual (inicia en 4 si no existe)
-    let voluntarios = localStorage.getItem('voluntarios');
-    voluntarios = voluntarios ? parseInt(voluntarios) : 4;
+    const ciudad = document.getElementById('ciudad').value;
 
-    // Sumar 1
-    voluntarios++;
+    // Obtener datos guardados
+    let datos = JSON.parse(localStorage.getItem('voluntarios')) || {
+        total: 4,
+        ciudades: {}
+    };
 
-    // Guardar
-    localStorage.setItem('voluntarios', voluntarios);
+    // Sumar total
+    datos.total++;
 
-    alert('Registro enviado. Total de voluntarios: ' + voluntarios);
+    // Sumar ciudad
+    if (datos.ciudades[ciudad]) {
+        datos.ciudades[ciudad]++;
+    } else {
+        datos.ciudades[ciudad] = 1;
+    }
 
-    this.reset();
+    // Guardar en memoria
+    localStorage.setItem('voluntarios', JSON.stringify(datos));
+
+    alert("Registro exitoso. Total de voluntarios: " + datos.total);
+
+    document.getElementById('registroForm').reset();
 });
 </script>
 
