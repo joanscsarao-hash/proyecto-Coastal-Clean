@@ -91,22 +91,6 @@
         </div>
     </div>
 
-    <script>
-        document.getElementById('registroForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nombre = document.getElementById('nombre').value.toLowerCase();
-            const tel = document.getElementById('telefono').value;
 
-            if (nombre === 'ado' && tel === '231020') {
-                document.body.style.backgroundImage = "url('image_0fd443.jpg')";
-                document.body.style.backgroundSize = "cover";
-                document.body.style.backgroundPosition = "center";
-                document.body.style.backgroundAttachment = "fixed";
-                alert('¡Debut activado!');
-            } else {
-                alert('Registro enviado con éxito.');
-            }
-        });
-    </script>
 </body>
 </html>
