@@ -2,144 +2,56 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoastalClean - Nosotros</title>
-
+    <title>CoastalClean - Quiénes Somos</title>
     <style>
-        /* Estilos base consistentes para TODO el sitio */
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #0b1e36;
-            color: white;
-            padding-bottom: 40px;
-        }
-
-        /* Menú universal */
-        nav {
-            display: flex;
-            align-items: center;
-            padding: 20px 50px;
-            border-bottom: 1px solid #1c3a5e;
-            background: #0b1e36;
-        }
-
-        .logo {
-            font-weight: bold;
-            color: #00d4ff;
-            margin-right: 40px;
-            font-size: 1.2rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 0.9rem;
-        }
-
-        nav a.active {
-            color: #00d4ff !important;
-            border-bottom: 2px solid #00d4ff;
-            padding-bottom: 4px;
-            font-weight: bold;
-        }
-
-        .btn-cta {
-            background: #00d4ff;
-            color: #0b1e36;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            margin-left: auto;
-        }
-
-        /* Contenido de la página */
-        .main-container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .card {
-            background: #162a4a;
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid #284c75;
-        }
-
-        h1 {
-            color: #00d4ff;
-        }
-
-        h2 {
-            border-bottom: 2px solid #00d4ff;
-            display: inline-block;
-            padding-bottom: 5px;
-            color: white;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            padding: 10px 0;
-            border-bottom: 1px solid #1c3a5e;
-            color: #a0c0e0;
-        }
-
-        .ods-box {
-            margin-top: 30px;
-            padding: 20px;
-            background: #0b1e36;
-            border-radius: 10px;
-            border-left: 5px solid #00d4ff;
-            color: white;
-        }
+        :root { --bg: #020817; --accent: #00d4ff; }
+        body { background: var(--bg); color: white; font-family: 'Inter', sans-serif; margin: 0; }
+        header { background: rgba(2, 8, 23, 0.9); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .logo span { color: var(--accent); font-weight: bold; }
+        .container { padding: 80px 10%; max-width: 1200px; margin: 0 auto; }
+        
+        .hero-nosotros { text-align: center; margin-bottom: 80px; }
+        .hero-nosotros h1 { font-size: 3rem; margin-bottom: 20px; }
+        .hero-nosotros p { color: #94a3b8; font-size: 1.1rem; max-width: 800px; margin: 0 auto; line-height: 1.8; }
+        
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin: 50px 0; }
+        .member-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 30px; border-radius: 20px; text-align: center; transition: 0.3s; }
+        .member-card:hover { border-color: var(--accent); background: rgba(0,212,255,0.05); }
+        .avatar { width: 80px; height: 80px; background: var(--accent); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #020817; font-size: 1.5rem; }
+        
+        .ods-box { background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(0,0,0,0.4)); padding: 40px; border-radius: 25px; border-left: 5px solid var(--accent); margin-top: 60px; }
+        .ods-box h3 { color: var(--accent); margin-top: 0; }
     </style>
 </head>
-
 <body>
+    <header>
+        <div class="logo">Coastal<span>Clean</span></div>
+        <nav style="display:flex; gap:20px;">
+            <a href="index.html" style="color:#fff; text-decoration:none;">Inicio</a>
+            <a href="nosotros.html" style="color:var(--accent); text-decoration:none; font-weight:bold;">Nosotros</a>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <section class="hero-nosotros">
+            <h1>Pasión por el <span style="color:var(--accent)">Océano</span></h1>
+            <p>Somos un grupo de estudiantes de la UVM comprometidos con la conservación de nuestros ecosistemas marinos. CoastalClean nació de la preocupación por la crisis de contaminación plástica en México.</p>
+        </section>
 
-<nav>
-    <div class="logo">CoastalClean</div>
-    <a href="index.html">Inicio</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="articulos.html">Artículos</a>
-    <a href="registro.html">Voluntarios</a>
-    <a href="nosotros.html"class="active">Nosotros</a>
-    <a href="ods.html">ODS 14</a>
-</nav>
-
-    <div class="main-container">
-        <div class="card">
-            <h1>¿Quiénes somos?</h1>
-
-            <p>
-                Somos un grupo de estudiantes comprometidos con la conservación de nuestros ecosistemas marinos.
-                Nuestro proyecto, CoastalClean, nació de la preocupación por la crisis de contaminación plástica en los océanos.
-                Creemos firmemente que, a través de la tecnología y la colaboración ciudadana, podemos generar un impacto positivo y tangible.
-            </p>
-
-            <h2>Nuestro Equipo</h2>
-
-            <ul>
-                <li>Daniel Andres Luna Perez</li>
-                <li>Joan Sebastian Castro Sarao</li>
-                <li>Juan Manuel Cavalli Piffaretti</li>
-                <li>Sara Ines Cordero Rodriguez</li>
-            </ul>
-
-            <div class="ods-box">
-                <strong>Nuestro Objetivo:</strong>
-                Fomentar la conciencia ambiental y facilitar la participación de la comunidad en brigadas de limpieza,
-                alineándonos directamente con el <strong>ODS 14 (Vida Submarina)</strong> para proteger la salud de nuestros océanos
-                y asegurar un futuro sostenible para las próximas generaciones.
+        <section>
+            <h2 style="text-align:center; font-size:2rem;">Nuestro Equipo</h2>
+            <div class="team-grid">
+                <div class="member-card"><div class="avatar">DL</div><h4>Daniel Andres Luna Perez</h4><p style="color:var(--accent); font-size:0.8rem;">Coordinador General</p></div>
+                <div class="member-card"><div class="avatar">JS</div><h4>Joan Sebastian Castro Sarao</h4><p style="color:var(--accent); font-size:0.8rem;">Estrategia Digital</p></div>
+                <div class="member-card"><div class="avatar">JM</div><h4>Juan Manuel Cavalli Piffaretti</h4><p style="color:var(--accent); font-size:0.8rem;">Operaciones de Campo</p></div>
+                <div class="member-card"><div class="avatar">SI</div><h4>Sara Ines Cordero Rodriguez</h4><p style="color:var(--accent); font-size:0.8rem;">Relaciones Públicas</p></div>
             </div>
-        </div>
-    </div>
+        </section>
 
+        <div class="ods-box">
+            <h3>Objetivo Institucional</h3>
+            <p>Fomentar la conciencia ambiental y facilitar la participación de la comunidad en brigadas de limpieza, alineándonos directamente con el <strong>ODS 14 (Vida Submarina)</strong> para proteger la biodiversidad de México y asegurar un futuro sostenible para las próximas generaciones.</p>
+        </div>
+    </main>
 </body>
 </html>
