@@ -3,204 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoastalClean - Hazte Voluntario</title>
-
+    <title>CoastalClean - Registro de Voluntarios México</title>
+    <!-- Fuente Premium -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
     <style>
-        /* Estilos Globales */
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #0b1e36;
-            color: white;
-            padding-bottom: 40px;
-            transition: background 0.5s ease;
+        :root {
+            --bg: #020617;
+            --accent: #00d4ff;
+            --glass: rgba(30, 41, 59, 0.7);
+            --border: rgba(255, 255, 255, 0.1);
+            --text: #f8fafc;
         }
 
-        /* Menú Maestro */
-        nav {
-            display: flex;
-            align-items: center;
-            padding: 20px 50px;
-            border-bottom: 1px solid #1c3a5e;
-            background: #0b1e36;
-            z-index: 1001;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background: radial-gradient(circle at center, #0f172a, var(--bg)); 
+            color: var(--text); 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            display: flex; 
+            flex-direction: column;
+            min-height: 100vh; 
         }
 
-        .logo {
-            font-weight: bold;
-            color: #00d4ff;
-            margin-right: 40px;
-            font-size: 1.2rem;
+        /* --- NAVEGACIÓN --- */
+        header { 
+            background: rgba(2, 6, 23, 0.9); 
+            backdrop-filter: blur(10px); 
+            padding: 1rem 5%; 
+            border-bottom: 1px solid var(--border);
+        }
+        nav { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            width: 100%;
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; }
+        .logo span { color: var(--accent); }
+        .nav-links a { 
+            color: #94a3b8; 
+            text-decoration: none; 
+            font-size: 0.9rem; 
+            margin-left: 20px;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 0.9rem;
-        }
-
-        nav a.active {
-            color: #00d4ff !important;
-            border-bottom: 2px solid #00d4ff;
-            padding-bottom: 4px;
-            font-weight: bold;
-        }
-
-        .btn-cta {
-            background: #00d4ff;
-            color: #0b1e36;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            margin-left: auto;
-        }
-
-        /* Contenedor del formulario */
-        .main-container {
+        /* --- CONTENEDOR DEL FORMULARIO --- */
+        .main-content {
+            flex-grow: 1;
             display: flex;
             justify-content: center;
+            align-items: center;
             padding: 40px 20px;
         }
 
-        .form-card {
-            background: #162a4a;
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid #284c75;
-            width: 100%;
-            max-width: 500px;
+        .form-container { 
+            background: var(--glass); 
+            backdrop-filter: blur(25px); 
+            border: 1px solid var(--border); 
+            padding: 50px; 
+            border-radius: 30px; 
+            width: 100%; 
+            max-width: 700px; 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5); 
             text-align: center;
         }
-
-        h1 {
-            margin-bottom: 10px;
-        }
-
-        p {
-            color: #a0c0e0;
-            margin-bottom: 30px;
-        }
-
-        /* Estilo de inputs */
-        .form-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+        
+        h2 { font-size: 2.2rem; margin-bottom: 10px; font-weight: 800; }
+        p.subtitle { color: #94a3b8; margin-bottom: 35px; font-size: 0.95rem; }
+        
+        .form-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 25px; 
+            margin-bottom: 25px; 
             text-align: left;
         }
 
-        label {
-            font-size: 0.8rem;
-            display: block;
-            margin-bottom: 5px;
-            color: #7a94b3;
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        label { font-size: 0.8rem; font-weight: 700; color: var(--accent); letter-spacing: 0.5px; }
+        
+        input, select, textarea { 
+            background: rgba(0,0,0,0.3); 
+            border: 1px solid var(--border); 
+            padding: 14px; 
+            border-radius: 12px; 
+            color: white; 
+            font-family: inherit; 
+            transition: 0.3s; 
+            width: 100%;
         }
 
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 12px;
-            background: #0b1e36;
-            border: 1px solid #284c75;
-            border-radius: 8px;
+        input:focus, select:focus { 
+            border-color: var(--accent); 
+            box-shadow: 0 0 15px rgba(0,212,255,0.2); 
+            outline: none; 
+        }
+
+        /* --- ESTILO PARA EL SELECT (SCROLLABLE) --- */
+        select option {
+            background: #0f172a; /* Fondo oscuro para las ciudades */
             color: white;
-            box-sizing: border-box;
-            margin-bottom: 15px;
         }
 
-        /* Botón */
-        .btn-submit {
-            background: #00d4ff;
-            color: #0b1e36;
-            border: none;
-            padding: 15px;
-            width: 100%;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
+        .phone-box { 
+            display: flex; 
+            align-items: center; 
+            background: rgba(0,0,0,0.3); 
+            border: 1px solid var(--border); 
+            border-radius: 12px; 
+            overflow: hidden;
+        }
+        .phone-box span { 
+            padding: 0 15px; 
+            color: var(--accent); 
+            font-weight: bold; 
+            border-right: 1px solid var(--border); 
+        }
+        .phone-box input { border: none; background: transparent; }
+        
+        .btn-reg { 
+            background: var(--accent); 
+            color: #020617; 
+            border: none; 
+            padding: 18px; 
+            border-radius: 15px; 
+            font-weight: 800; 
+            font-size: 1rem; 
+            cursor: pointer; 
+            transition: 0.4s; 
+            width: 100%; 
             margin-top: 10px;
+            text-transform: uppercase;
+        }
+        .btn-reg:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 15px 30px rgba(0,212,255,0.4); 
+            background: #fff; 
         }
 
-        .btn-submit:hover {
-            opacity: 0.9;
-        }
+        footer { padding: 30px; text-align: center; color: #475569; font-size: 0.8rem; }
     </style>
 </head>
-
 <body>
 
-    <nav>
-        <div class="logo">CoastalClean</div>
-        <a href="index.html">Inicio</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="articulos.html">Artículos</a>
-        <a href="registro.html" class="active">Voluntarios</a>
-        <a href="nosotros.html">Nosotros</a>
-        <a href="registro.html" class="btn-cta">Únete Ahora</a>
-    </nav>
+    <header>
+        <nav>
+            <div class="logo">Coastal<span>Clean</span></div>
+            <div class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="nosotros.html">Nosotros</a>
+            </div>
+        </nav>
+    </header>
 
-    <div class="main-container">
-        <div class="form-card">
-            <h1>Hazte Voluntario</h1>
-            <p>Completa el formulario para unirte a una brigada de limpieza</p>
-
-            <form id="registroForm">
-                <div class="form-group">
-                    <div>
+    <main class="main-content">
+        <div class="form-container">
+            <h2>Hazte Voluntario</h2>
+            <p class="subtitle">Únete a las brigadas de limpieza costera en México</p>
+            
+            <form onsubmit="alert('¡Registro exitoso, Pedro! Nos vemos en la próxima brigada.'); return false;">
+                <div class="form-grid">
+                    <div class="input-group">
                         <label>Nombre Completo *</label>
-                        <input type="text" id="nombre" placeholder="Tu nombre" required>
+                        <input type="text" placeholder="Tu nombre" required>
                     </div>
-
-                    <div>
-                        <label>Email *</label>
-                        <input type="email" placeholder="@email.com" required>
+                    <div class="input-group">
+                        <label>Correo Institucional *</label>
+                        <input type="email" placeholder="ejemplo@uvm.mx" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Teléfono</label>
+                        <div class="phone-box">
+                            <span>+52</span>
+                            <input type="tel" placeholder="55 1234 5678" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Ciudad / Estado *</label>
+                        <select required>
+                            <option value="" disabled selected>Selecciona tu ubicación...</option>
+                            <option>Aguascalientes</option>
+                            <option>Baja California</option>
+                            <option>Baja California Sur</option>
+                            <option>Campeche</option>
+                            <option>Chiapas</option>
+                            <option>Chihuahua</option>
+                            <option>Ciudad de México</option>
+                            <option>Coahuila</option>
+                            <option>Colima</option>
+                            <option>Durango</option>
+                            <option>Estado de México</option>
+                            <option>Guanajuato</option>
+                            <option>Guerrero</option>
+                            <option>Hidalgo</option>
+                            <option>Jalisco</option>
+                            <option>Michoacán</option>
+                            <option>Morelos</option>
+                            <option>Nayarit</option>
+                            <option>Nuevo León</option>
+                            <option>Oaxaca</option>
+                            <option>Puebla</option>
+                            <option>Querétaro</option>
+                            <option>Quintana Roo</option>
+                            <option>San Luis Potosí</option>
+                            <option>Sinaloa</option>
+                            <option>Sonora</option>
+                            <option>Tabasco</option>
+                            <option>Tamaulipas</option>
+                            <option>Tlaxcala</option>
+                            <option>Veracruz</option>
+                            <option>Yucatán</option>
+                            <option>Zacatecas</option>
+                        </select>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div>
-                        <label>Teléfono</label>
-                        <input type="text" id="telefono" placeholder="+52 000 000 000">
-                    </div>
-
-                    <div>
-                        <label>Ciudad</label>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Experiencia previa</label>
                         <select>
-                             <option>Ciudad de México</option>
-                            <option>Tijuana</option>
-                            <option>León</option>
-                            <option>Puebla de Zaragoza</option>
-                            <option>Tijuana</option>
-                            <option>Ciudad Juárez</option>
-                            <option>Monterrey</option>
-                            <option>Zapopan</option>
-                            <option>Querétaro</option>
-                            <option>Ecatepec</option>
-                          </select>
+                            <option>Sin experiencia</option>
+                            <option>He participado en brigadas</option>
+                            <option>Líder de grupo ambiental</option>
+                        </select>
                     </div>
-            
+                    <div class="input-group">
+                        <label>Disponibilidad</label>
+                        <select>
+                            <option>Fines de semana</option>
+                            <option>Entre semana (Tardes)</option>
+                            <option>Solo eventos especiales</option>
+                        </select>
+                    </div>
+                </div>
 
-                <label>Experiencia</label>
-                <select>
-                    <option>Sin experiencia</option>
-                    <option>Con experiencia previa</option>
-                </select>
+                <div class="input-group" style="margin-bottom: 25px;">
+                    <label>¿Por qué quieres participar?</label>
+                    <textarea rows="3" placeholder="Cuéntanos tu motivación para salvar nuestros océanos..."></textarea>
+                </div>
 
-                <label>Disponibilidad</label>
-                <select>
-                    <option>Fines de semana</option>
-                    <option>Días de semana</option>
-                </select>
-
-                <label>¿Por qué quieres participar?</label>
-                <textarea rows="3" placeholder="Cuéntanos tu motivación..."></textarea>
-
-                <button type="submit" class="btn-submit">Registrarme</button>
+                <button type="submit" class="btn-reg">Registrarme Ahora →</button>
             </form>
         </div>
-    </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 CoastalClean | Proyecto Universitario UVM México</p>
+    </footer>
+
+</body>
+</html>
 
 </body>
 </html>
