@@ -246,6 +246,7 @@
 
     <footer>
         <p>&copy; 2026 CoastalClean | Innovación Ambiental UVM México</p>
+
     </footer>
 
     <script>
@@ -266,7 +267,7 @@
             });
         });
 
-        // Cerrar modales con el botón de la equis (X)
+      
         closeButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 e.stopPropagation(); // Evita interferencias con el clic de la tarjeta
@@ -276,7 +277,7 @@
             });
         });
 
-        // Cerrar modal al hacer clic en el fondo difuminado (afuera del contenido)
+     
         window.addEventListener('click', (e) => {
             modals.forEach(modal => {
                 if (e.target === modal) {
