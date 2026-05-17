@@ -6,8 +6,60 @@
     <style>
         :root { --bg: #020817; --accent: #00d4ff; }
         body { background: var(--bg); color: white; font-family: 'Inter', sans-serif; margin: 0; }
-        header { background: rgba(2, 8, 23, 0.9); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .logo span { color: var(--accent); font-weight: bold; }
+        
+        /* --- Cambios en la interfaz de navegación --- */
+        header { 
+            background: rgba(2, 8, 23, 0.85); 
+            backdrop-filter: blur(10px); /* Efecto difuminado moderno */
+            padding: 1rem 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 1px solid rgba(255,255,255,0.08); 
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo { font-size: 1.4rem; font-weight: bold; letter-spacing: 0.5px; }
+        .logo span { color: var(--accent); }
+        
+        .nav-links { 
+            display: flex; 
+            gap: 25px; 
+            list-style: none; 
+            margin: 0; 
+            padding: 0; 
+        }
+        .nav-links a { 
+            color: #94a3b8; 
+            text-decoration: none; 
+            font-size: 0.95rem; 
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        /* Efecto de línea inferior al pasar el cursor */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+        .nav-links a:hover { color: white; }
+        .nav-links a.active { color: var(--accent); }
+        /* -------------------------------------------- */
+
         .container { padding: 80px 10%; max-width: 1200px; margin: 0 auto; }
         
         .hero-nosotros { text-align: center; margin-bottom: 80px; }
@@ -26,18 +78,16 @@
 <body>
     <header>
         <div class="logo">Coastal<span>Clean</span></div>
-        <nav style="display:flex; gap:20px;">
-           <nav>
-        <div class="logo">Coastal<span>Clean</span></div>
-        <ul class="nav-links">
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="articulos.html" style="color:var(--accent)">Artículos</a></li>
-            <li><a href="registro.html">Voluntarios</a></li>
-            <li><a href="nosotros.html">Nosotros</a></li>
-            <li><a href="blog.html">Blog</a></li>
-        </ul>
-    </nav>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="articulos.html">Artículos</a></li>
+                <li><a href="registro.html">Voluntarios</a></li>
+                <li><a href="nosotros.html" class="active">Nosotros</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+        </nav>
     </header>
     
     <main class="container">
