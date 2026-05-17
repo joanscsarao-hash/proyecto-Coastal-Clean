@@ -1,0 +1,230 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoastalClean | Blog Ambiental</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-deep: #020617;
+            --bg-card: rgba(15, 23, 42, 0.6);
+            --accent: #00d4ff;
+            --accent-glow: rgba(0, 212, 255, 0.3);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --gradient: linear-gradient(135deg, #00d4ff 0%, #0080ff 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        header {
+            position: fixed;
+            top: 0; width: 100%; z-index: 1000;
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.2rem 5%; max-width: 1400px; margin: 0 auto;
+        }
+
+        .logo { font-size: 1.6rem; font-weight: 800; letter-spacing: -1px; }
+        .logo span { color: var(--accent); text-shadow: 0 0 15px var(--accent-glow); }
+
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { 
+            color: var(--text-dim); text-decoration: none; 
+            font-size: 0.9rem; font-weight: 600; transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a.active { color: var(--accent); }
+
+        .btn-top {
+            background: var(--gradient); color: var(--bg-deep);
+            padding: 10px 22px; border-radius: 12px;
+            text-decoration: none; font-weight: 800; font-size: 0.85rem;
+            box-shadow: 0 10px 20px var(--accent-glow); transition: 0.3s;
+        }
+        .btn-top:hover { transform: translateY(-2px); box-shadow: 0 15px 25px var(--accent-glow); }
+
+        /* --- CABECERA DEL BLOG --- */
+        .blog-header {
+            padding: 160px 5% 40px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+
+        .blog-header::before {
+            content: ""; position: absolute; top: 0; left: 50%;
+            width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%);
+            transform: translate(-50%, -20%); z-index: -1;
+        }
+
+        .blog-header h1 {
+            font-size: clamp(2rem, 6vw, 3.8rem); font-weight: 800;
+            line-height: 1.2; letter-spacing: -1px; margin-bottom: 20px;
+        }
+        .blog-header h1 span {
+            background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        /* --- BARRA DE BÚSQUEDA --- */
+        .search-container {
+            max-width: 600px; margin: 30px auto 0; position: relative;
+        }
+
+        .search-input {
+            width: 100%; padding: 18px 25px; border-radius: 16px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-main); font-family: inherit; font-size: 1rem;
+            transition: 0.3s; backdrop-filter: blur(10px);
+        }
+
+        .search-input:focus {
+            outline: none; border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+
+        /* --- CUADRÍCULA DE ARTÍCULOS --- */
+        .blog-container {
+            max-width: 1200px; margin: 0 auto; padding: 60px 5% 120px;
+        }
+
+        .blog-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: var(--bg-card); border: 1px solid rgba(255,255,255,0.03);
+            border-radius: 24px; padding: 35px; display: flex; flex-direction: column;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px); position: relative; overflow: hidden;
+        }
+
+        .blog-card:hover {
+            border-color: var(--accent); transform: translateY(-8px);
+            background: rgba(0,212,255,0.02);
+        }
+
+        .blog-card .tag {
+            align-self: flex-start; background: rgba(0, 212, 255, 0.1);
+            color: var(--accent); font-size: 0.75rem; font-weight: 800;
+            padding: 6px 14px; border-radius: 30px; letter-spacing: 1px;
+            text-transform: uppercase; margin-bottom: 20px;
+        }
+
+        .blog-card h2 { font-size: 1.5rem; margin-bottom: 15px; line-height: 1.3; color: var(--text-main); }
+        .blog-card p { color: var(--text-dim); font-size: 0.95rem; flex-grow: 1; margin-bottom: 25px; }
+
+        .blog-card .read-more {
+            color: var(--text-main); text-decoration: none; font-weight: 700;
+            font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px;
+            transition: 0.3s;
+        }
+        .blog-card:hover .read-more { color: var(--accent); }
+
+        /* Mensaje de no resultados */
+        .no-results {
+            text-align: center; color: var(--text-dim); font-size: 1.2rem;
+            grid-column: 1 / -1; display: none; padding: 40px 0;
+        }
+
+        footer { padding: 40px; text-align: center; color: var(--text-dim); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.02); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">Coastal<span>Clean</span></div>  
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="articulos.html">Artículos</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="registro.html">Voluntarios</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+            </ul>
+            <a href="registro.html" class="btn-top">Únete Ahora</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="blog-header">
+            <h1>Impacto de la contaminación <br><span>en las playas</span></h1>
+            <div class="search-container">
+                <input type="text" id="blogSearch" class="search-input" placeholder="Buscar artículos del ecosistema marino...">
+            </div>
+        </section>
+
+        <section class="blog-container">
+            <div class="blog-grid" id="blogGrid">
+                
+                <article class="blog-card">
+                    <span class="tag">Acción Ciudadana</span>
+                    <h2>Consejos para mantener limpias las playas</h2>
+                    <p>Pequeñas acciones generan grandes cambios. Desde reducir plásticos de un solo uso hasta participar en brigadas locales de recolección, descubre cómo tu próxima visita al mar puede dejar una huella positiva en el entorno.</p>
+                    <a href="#" class="read-more">Leer artículo completo →</a>
+                </article>
+
+                <article class="blog-card">
+                    <span class="tag">Biodiversidad</span>
+                    <h2>Animales marinos en peligro por la contaminación</h2>
+                    <p>Tortugas, aves playeras y mamíferos marinos confunden nuestros desechos con alimento o quedan atrapados en redes fantasma. Analizamos las especies de las costas mexicanas que enfrentan el mayor riesgo crítico hoy en día.</p>
+                    <a href="#" class="read-more">Leer artículo completo →</a>
+                </article>
+
+                <div class="no-results" id="noResults">No se encontraron artículos que coincidan con tu búsqueda.</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 CoastalClean | Innovación Ambiental UVM México</p>
+        <p style="margin-top: 10px; font-size: 0.7rem;">Diseño por Pedro Ricardo Peña Talledo</p>
+    </footer>
+
+    <script>
+        // Lógica del Buscador en tiempo real
+        const searchInput = document.getElementById('blogSearch');
+        const cards = document.querySelectorAll('.blog-card');
+        const noResults = document.getElementById('noResults');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            let hasMatches = false;
+
+            cards.forEach(card => {
+                const title = card.querySelector('h2').textContent.toLowerCase();
+                const text = card.querySelector('p').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || text.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                    hasMatches = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Mostrar u ocultar el mensaje de "no resultados"
+            if (hasMatches) {
+                noResults.style.display = 'none';
+            } else {
+                noResults.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
