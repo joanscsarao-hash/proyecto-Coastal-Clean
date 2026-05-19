@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoastalClean | Blog Ambiental</title>
-    <link href="https://fonts.googleapis.com/css2=family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -106,24 +106,26 @@
             display: flex; flex-direction: column; gap: 40px;
         }
 
-        /* Tarjeta Principal Superior (Tema General) */
+        /* Tarjeta Principal Superior (Impacto General) */
         .featured-article {
             background: linear-gradient(180deg, rgba(15, 23, 42, 0.8) 0%, rgba(2, 6, 23, 0.5) 100%);
             border: 1px solid rgba(0, 212, 255, 0.15); border-radius: 32px;
             padding: 50px; cursor: pointer; transition: 0.4s ease;
             backdrop-filter: blur(12px); box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center;
         }
         .featured-article:hover {
             border-color: var(--accent); transform: translateY(-4px);
             box-shadow: 0 25px 50px rgba(0, 212, 255, 0.08);
         }
-        .featured-article .main-tag {
-            background: rgba(0, 212, 255, 0.1); color: var(--accent); border: 1px solid rgba(0, 212, 255, 0.2);
-            font-size: 0.75rem; font-weight: 800; padding: 6px 16px; border-radius: 30px;
-            text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 20px;
-        }
         .featured-article h2 { font-size: 2.3rem; margin-bottom: 15px; font-weight: 800; letter-spacing: -0.5px; }
         .featured-article p { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 25px; line-height: 1.7; }
+        
+        .featured-img-container {
+            width: 100%; height: 320px; border-radius: 20px; overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .featured-img-container img { width: 100%; height: 100%; object-fit: cover; }
 
         /* Cuadrícula de Subtemas (2 Columnas) */
         .sub-grid {
@@ -141,29 +143,22 @@
             background: rgba(0,212,255,0.015); box-shadow: 0 20px 40px rgba(0, 212, 255, 0.05); 
         }
 
-        .blog-card .card-tag {
-            align-self: flex-start; background: rgba(0, 212, 255, 0.08); color: var(--accent);
-            font-size: 0.72rem; font-weight: 800; padding: 6px 14px; border-radius: 30px;
-            letter-spacing: 1px; text-transform: uppercase; margin-bottom: 22px;
-            border: 1px solid rgba(0, 212, 255, 0.15);
-        }
         .blog-card h3 { font-size: 1.45rem; margin-bottom: 15px; font-weight: 800; letter-spacing: -0.3px; }
         .blog-card p { color: var(--text-dim); font-size: 0.98rem; flex-grow: 1; margin-bottom: 25px; line-height: 1.65; }
 
-        /* Contenedor de mini-imagen en tarjeta */
+        /* Contenedores de imagen reales en tarjetas */
         .card-img-preview {
-            width: 100%; height: 160px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.8));
-            border-radius: 14px; border: 1px solid var(--border-spec); margin-bottom: 20px;
-            display: flex; justify-content: center; align-items: center; color: var(--text-dim);
-            font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+            width: 100%; height: 200px; border-radius: 14px; overflow: hidden;
+            border: 1px solid var(--border-spec); margin-bottom: 25px;
         }
+        .card-img-preview img { width: 100%; height: 100%; object-fit: cover; }
 
         .read-more-btn {
             color: var(--text-main); font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s;
         }
         .blog-card:hover .read-more-btn { color: var(--accent); }
 
-        /* --- VENTANAS MODALES (ARTÍCULOS COMPLETOS) --- */
+        /* --- VENTANAS MODALES --- */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(2, 6, 23, 0.94); backdrop-filter: blur(25px);
@@ -192,19 +187,18 @@
         .modal-content p { color: var(--text-dim); font-size: 1.05rem; margin-bottom: 20px; line-height: 1.8; }
         
         .modal-img {
-            width: 100%; height: 300px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(30, 41, 59, 0.6));
-            border-radius: 20px; border: 1px dashed rgba(0, 212, 255, 0.3); margin: 25px 0;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--accent);
-            font-size: 0.9rem; font-weight: 600; text-transform: uppercase; text-align: center; padding: 20px;
+            width: 100%; height: 350px; border-radius: 20px; overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.2); margin: 25px 0;
         }
-        .modal-img span { color: var(--text-dim); font-size: 0.8rem; margin-top: 6px; font-transform: none; font-weight: normal; }
+        .modal-img img { width: 100%; height: 100%; object-fit: cover; }
 
         footer { padding: 40px; text-align: center; color: var(--text-dim); font-size: 0.85rem; border-top: 1px solid var(--border-spec); margin-top: 50px; }
         
-        @media (max-width: 900px) {
+        @media (max-width: 950px) {
+            .featured-article { grid-template-columns: 1fr; padding: 35px 25px; }
+            .featured-img-container { height: 240px; }
             .sub-grid { grid-template-columns: 1fr; }
             .modal-content { padding: 35px 20px; }
-            .featured-article { padding: 35px 25px; }
         }
     </style>
 </head>
@@ -241,26 +235,32 @@
 
         <div class="blog-layout">
             
-            <section class="featured-article" data-id="modal-general" data-tags="general impacto">
-                <span class="main-tag">Tema Central</span>
-                <h2>El Impacto Crítico de la Contaminación en los Litorales</h2>
-                <p>Las playas de todo el mundo se han convertido en los vertederos mecánicos de la actividad humana. Toneladas de plásticos, colillas y desechos químicos destruyen diariamente los ecosistemas costeros, rompiendo el equilibrio ecológico, dañando las dunas y comprometiendo gravemente el futuro del ecosistema marino y costero. Explora el diagnóstico completo haciendo clic aquí.</p>
-                <span class="read-more-btn" style="color: var(--accent);">Ver panorama general →</span>
+            <section class="featured-article" data-id="modal-general" data-tags="general impacto contaminacion dunas arena">
+                <div>
+                    <h2>El Impacto Crítico de la Contaminación en los Litorales</h2>
+                    <p>Las playas de todo el mundo se han convertido en los vertederos mecánicos de la actividad humana. Toneladas de plásticos, colillas y desechos químicos destruyen diariamente los ecosistemas costeros, rompiendo el equilibrio ecológico, dañando las dunas y comprometiendo gravemente el futuro del ecosistema marino y costero. Explora el diagnóstico completo haciendo clic aquí.</p>
+                    <span class="read-more-btn" style="color: var(--accent);">Ver panorama general →</span>
+                </div>
+                <div class="featured-img-container">
+                    <img src="https://cienciaybiologia.com/wp-content/uploads/2021/05/playa-contaminada.png" alt="Playa contaminada con residuos plásticos">
+                </div>
             </section>
 
             <section class="sub-grid" id="blogGrid">
                 
-                <article class="blog-card" data-id="modal-consejos" data-tags="consejos limpiar playas voluntariado">
-                    <div class="card-img-preview">[ Imagen: Voluntariado en Playa ]</div>
-                    <span class="card-tag">Subtema 1</span>
+                <article class="blog-card" data-id="modal-consejos" data-tags="consejos limpiar playas voluntariado contenedores reciclaje">
+                    <div class="card-img-preview">
+                        <img src="https://contenur.mx/wp-content/uploads/2024/10/Codigo-Colores-Contenedores.webp" alt="Código de colores y contenedores de reciclaje">
+                    </div>
                     <h3>Consejos para mantener limpias las playas</h3>
                     <p>Mantener las playas libres de residuos requiere acciones ciudadanas coordinadas y responsables. Explora nuestra guía de acciones prácticas inmediatas, manejo adecuado de residuos personales y organización comunitaria activa.</p>
                     <span class="read-more-btn">Explorar apartados →</span>
                 </article>
 
-                <article class="blog-card" data-id="modal-animales" data-tags="fauna animales peligro especies mar">
-                    <div class="card-img-preview">[ Imagen: Fauna Marina Afectada ]</div>
-                    <span class="card-tag">Subtema 2</span>
+                <article class="blog-card" data-id="modal-animales" data-tags="fauna animales peligro especies mar tortugas redes">
+                    <div class="card-img-preview">
+                        <img src="https://iresiduo.com/sites/default/files/styles/thumbnail-830x455/public/tortugas_plastico.jpg?itok=U9R5s-Eu" alt="Tortuga marina afectada por residuos de plástico">
+                    </div>
                     <h3>Animales marinos en peligro por la contaminación</h3>
                     <p>La fauna costera y marina se enfrenta a trampas mortales invisibles creadas por residuos industriales. Descubre cuáles son las especies más afectadas y los letales peligros de la ingesta accidental y las redes fantasma.</p>
                     <span class="read-more-btn">Explorar apartados →</span>
@@ -275,10 +275,11 @@
             <button class="close-modal">&times;</button>
             <h2>Impacto de la contaminación en las playas</h2>
             <p>La acumulación de basura en los litorales es una problemática global compleja que acelera la degradación geológica del suelo y compromete la resiliencia climática natural de las costas frente a fenómenos como huracanes y tormentas.</p>
+            
             <div class="modal-img">
-                [ Imagen de satélite o costera que muestra la acumulación de plásticos en la línea de marea ]
-                <span>Residuos sólidos acumulados por las corrientes marinas en playas turísticas</span>
+                <img src="https://cienciaybiologia.com/wp-content/uploads/2021/05/playa-contaminada.png" alt="Playa contaminada con residuos plásticos">
             </div>
+
             <h4>Un problema sistémico</h4>
             <p>Los residuos alteran las propiedades de la arena, afectando la flora nativa y los microorganismos básicos del suelo marino. Detener esta crisis requiere combinar esfuerzos urgentes de conservación biológica con metodologías comunitarias eficientes.</p>
         </div>
@@ -291,8 +292,7 @@
             <p>El cuidado costero empieza con cambios sencillos pero contundentes en nuestros hábitos cotidianos. Conoce los apartados clave para actuar:</p>
             
             <div class="modal-img">
-                [ Imagen informativa detallando contenedores de reciclaje y separación de basura en áreas públicas ]
-                <span>Infografía de gestión de residuos y separación correcta en playas</span>
+                <img src="https://contenur.mx/wp-content/uploads/2024/10/Codigo-Colores-Contenedores.webp" alt="Código de colores y contenedores de reciclaje">
             </div>
 
             <h4>Apartado A: Consumo Responsable y Regla de Cero Residuos</h4>
@@ -313,8 +313,7 @@
             <p>Los desechos sólidos introducidos a los litorales impactan de forma devastadora la supervivencia biológica marina:</p>
 
             <div class="modal-img">
-                [ Fotografía de tortuga marina o ave costera interactuando erróneamente con desechos plásticos ]
-                <span>Impacto biológico de los macroplásticos en especies costeras protegidas</span>
+                <img src="https://iresiduo.com/sites/default/files/styles/thumbnail-830x455/public/tortugas_plastico.jpg?itok=U9R5s-Eu" alt="Tortuga marina afectada por residuos de plástico">
             </div>
 
             <h4>Apartado A: Ingesta Accidental de Macroplásticos</h4>
@@ -323,7 +322,7 @@
             <h4>Apartado B: Redes Fantasma y Enredos Incidentales</h4>
             <p>Aparejos y redes de pesca abandonados flotan a la deriva, atrapando a mamíferos como delfines y lobos marinos. Esto restringe permanentemente sus movimientos, provocándoles heridas graves o asfixia al impedirles salir a la superficie a respirar.</p>
 
-            <h4>Apartado C: La Amenaza Invisible de los Microplásticos</h4>
+            <h4>Apartado C: La Threat Invisible de los Microplásticos</h4>
             <p>Por la radiación solar, los plásticos se fragmentan en micropartículas que absorben toxinas del agua. Al ser consumidas por especies pequeñas, los contaminantes químicos viajan por la red trófica, afectando la salud de los grandes depredadores.</p>
         </div>
     </div>
@@ -333,7 +332,7 @@
     </footer>
 
     <script>
-        // --- LÓGICA DE BÚSQUEDA Y FILTRADO EN TIEMPO REAL ("COMO SI SE PUDIERAN BUSCAR") ---
+        // --- LÓGICA DE BÚSQUEDA Y FILTRADO EN TIEMPO REAL ---
         const searchInput = document.getElementById('blogSearch');
         const filterButtons = document.querySelectorAll('.filter-btn');
         const cards = document.querySelectorAll('.blog-card, .featured-article');
@@ -359,14 +358,13 @@
                 }
 
                 if (matchesSearch && matchesFilter) {
-                    card.style.display = 'flex';
+                    card.style.display = card.classList.contains('featured-article') ? 'grid' : 'flex';
                 } else {
                     card.style.display = 'none';
                 }
             });
         }
 
-        // Eventos para la barra de búsqueda y botones de filtro
         searchInput.addEventListener('input', filterBlog);
 
         filterButtons.forEach(btn => {
@@ -377,7 +375,7 @@
             });
         });
 
-        // --- LÓGICA DE CONTROL DE LAS VENTANAS MODALES ---
+        // --- LÓGICA DE APERTURA Y CIERRE DE VENTANAS MODALES ---
         const closeButtons = document.querySelectorAll('.close-modal');
         const modals = document.querySelectorAll('.modal');
 
