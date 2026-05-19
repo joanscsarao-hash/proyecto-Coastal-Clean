@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoastalClean | Blog Ambiental</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2=family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -15,8 +15,6 @@
             --text-main: #f8fafc;
             --text-dim: #94a3b8;
             --gradient: linear-gradient(135deg, #00d4ff 0%, #0080ff 100%);
-            --danger: #ef4444;
-            --danger-glow: rgba(239, 68, 68, 0.2);
             --border-spec: rgba(255, 255, 255, 0.05);
         }
 
@@ -28,15 +26,6 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Fondo decorativo dinámico */
-        body::before {
-            content: ""; position: fixed; top: -10%; left: -10%; width: 120%; height: 120%;
-            background: radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 10% 80%, rgba(0, 128, 255, 0.03) 0%, transparent 40%);
-            z-index: -2; pointer-events: none;
         }
 
         /* --- NAVEGACIÓN --- */
@@ -73,8 +62,7 @@
 
         /* --- CABECERA --- */
         .blog-header {
-            padding: 160px 5% 20px; text-align: center;
-            position: relative;
+            padding: 150px 5% 20px; text-align: center;
         }
 
         .blog-header h1 {
@@ -85,66 +73,97 @@
             background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* --- CUADRÍCULA ESTRUCTURAL --- */
-        .blog-layout {
-            max-width: 1300px; margin: 0 auto; padding: 20px 5% 100px;
-            display: flex; flex-direction: column; gap: 35px;
+        /* --- BARRA DE BÚSQUEDA Y FILTROS INTERACTIVOS --- */
+        .search-container {
+            max-width: 600px; margin: 0 auto 30px; padding: 0 5%;
+        }
+        .search-bar {
+            width: 100%; padding: 16px 25px; background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-spec); border-radius: 16px;
+            color: var(--text-main); font-size: 1rem; transition: 0.3s;
+            outline: none; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .search-bar:focus {
+            border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow);
         }
 
-        /* Artículo Destacado superior */
+        .filter-tags {
+            display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border-spec);
+            color: var(--text-dim); padding: 8px 18px; border-radius: 30px;
+            cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: 0.3s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--gradient); color: var(--bg-deep); border-color: transparent;
+            font-weight: 800; box-shadow: 0 5px 15px var(--accent-glow);
+        }
+
+        /* --- DISEÑO DE CONTENIDO --- */
+        .blog-layout {
+            max-width: 1300px; margin: 0 auto; padding: 0 5% 100px;
+            display: flex; flex-direction: column; gap: 40px;
+        }
+
+        /* Tarjeta Principal Superior (Tema General) */
         .featured-article {
-            background: linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(2, 6, 23, 0.5) 100%);
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.8) 0%, rgba(2, 6, 23, 0.5) 100%);
             border: 1px solid rgba(0, 212, 255, 0.15); border-radius: 32px;
-            padding: 50px; cursor: pointer; transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative; backdrop-filter: blur(12px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            padding: 50px; cursor: pointer; transition: 0.4s ease;
+            backdrop-filter: blur(12px); box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
         .featured-article:hover {
             border-color: var(--accent); transform: translateY(-4px);
-            box-shadow: 0 30px 60px rgba(0, 212, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 212, 255, 0.08);
         }
-        .featured-article .tag {
-            background: var(--gradient); color: var(--bg-deep);
-            font-size: 0.75rem; font-weight: 800; padding: 6px 16px;
-            border-radius: 30px; text-transform: uppercase; letter-spacing: 1px;
-            display: inline-block; margin-bottom: 20px;
+        .featured-article .main-tag {
+            background: rgba(0, 212, 255, 0.1); color: var(--accent); border: 1px solid rgba(0, 212, 255, 0.2);
+            font-size: 0.75rem; font-weight: 800; padding: 6px 16px; border-radius: 30px;
+            text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 20px;
         }
-        .featured-article h2 { font-size: 2.4rem; margin-bottom: 18px; font-weight: 800; line-height: 1.25; letter-spacing: -0.5px; }
-        .featured-article p { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 25px; max-width: 950px; line-height: 1.7; }
-        .featured-article .read-more {
-            color: var(--accent); font-weight: 700; font-size: 1rem;
-            display: inline-flex; align-items: center; gap: 8px;
-        }
+        .featured-article h2 { font-size: 2.3rem; margin-bottom: 15px; font-weight: 800; letter-spacing: -0.5px; }
+        .featured-article p { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 25px; line-height: 1.7; }
 
-        /* Cuadrícula de 3 Columnas inferior */
+        /* Cuadrícula de Subtemas (2 Columnas) */
         .sub-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;
         }
 
         .blog-card {
             background: var(--bg-card); border: 1px solid var(--border-spec);
-            border-radius: 24px; padding: 38px; display: flex; flex-direction: column;
+            border-radius: 24px; padding: 40px; display: flex; flex-direction: column;
             transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); backdrop-filter: blur(12px);
             cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
-        .blog-card:hover { border-color: var(--accent); transform: translateY(-8px); background: rgba(0,212,255,0.015); box-shadow: 0 20px 40px rgba(0, 0, 212, 0.05); }
+        .blog-card:hover { 
+            border-color: var(--accent); transform: translateY(-8px); 
+            background: rgba(0,212,255,0.015); box-shadow: 0 20px 40px rgba(0, 212, 255, 0.05); 
+        }
 
-        .blog-card .tag {
+        .blog-card .card-tag {
             align-self: flex-start; background: rgba(0, 212, 255, 0.08); color: var(--accent);
             font-size: 0.72rem; font-weight: 800; padding: 6px 14px; border-radius: 30px;
             letter-spacing: 1px; text-transform: uppercase; margin-bottom: 22px;
             border: 1px solid rgba(0, 212, 255, 0.15);
         }
-        .blog-card h3 { font-size: 1.35rem; margin-bottom: 15px; line-height: 1.35; font-weight: 800; letter-spacing: -0.3px; }
-        .blog-card p { color: var(--text-dim); font-size: 0.95rem; flex-grow: 1; margin-bottom: 25px; line-height: 1.65; }
+        .blog-card h3 { font-size: 1.45rem; margin-bottom: 15px; font-weight: 800; letter-spacing: -0.3px; }
+        .blog-card p { color: var(--text-dim); font-size: 0.98rem; flex-grow: 1; margin-bottom: 25px; line-height: 1.65; }
 
-        .blog-card .read-more {
-            color: var(--text-main); text-decoration: none; font-weight: 700;
-            font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s;
+        /* Contenedor de mini-imagen en tarjeta */
+        .card-img-preview {
+            width: 100%; height: 160px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.8));
+            border-radius: 14px; border: 1px solid var(--border-spec); margin-bottom: 20px;
+            display: flex; justify-content: center; align-items: center; color: var(--text-dim);
+            font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
         }
-        .blog-card:hover .read-more { color: var(--accent); }
 
-        /* --- VENTANAS MODALES --- */
+        .read-more-btn {
+            color: var(--text-main); font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s;
+        }
+        .blog-card:hover .read-more-btn { color: var(--accent); }
+
+        /* --- VENTANAS MODALES (ARTÍCULOS COMPLETOS) --- */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(2, 6, 23, 0.94); backdrop-filter: blur(25px);
@@ -155,9 +174,8 @@
 
         .modal-content {
             background: #0f172a; border: 1px solid rgba(0, 212, 255, 0.25); border-radius: 32px;
-            max-width: 880px; width: 90%; max-height: 85vh; overflow-y: auto; padding: 50px;
+            max-width: 850px; width: 90%; max-height: 85vh; overflow-y: auto; padding: 50px;
             position: relative; transform: translateY(40px); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 0 60px rgba(0, 212, 255, 0.15);
         }
         .modal.active .modal-content { transform: translateY(0); }
 
@@ -169,41 +187,22 @@
         }
         .close-modal:hover { background: var(--accent); color: var(--bg-deep); }
 
-        .modal-content h2 { font-size: 2.2rem; margin-bottom: 25px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; letter-spacing: -0.5px; }
+        .modal-content h2 { font-size: 2.2rem; margin-bottom: 25px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
         .modal-content h4 { color: var(--accent); font-size: 1.15rem; margin: 35px 0 15px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; border-left: 4px solid var(--accent); padding-left: 12px; }
         .modal-content p { color: var(--text-dim); font-size: 1.05rem; margin-bottom: 20px; line-height: 1.8; }
         
-        /* Contenedores de imagen simulados estéticos */
-        .image-placeholder {
+        .modal-img {
             width: 100%; height: 300px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(30, 41, 59, 0.6));
             border-radius: 20px; border: 1px dashed rgba(0, 212, 255, 0.3); margin: 25px 0;
             display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--accent);
-            font-size: 0.95rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 20px; text-align: center;
+            font-size: 0.9rem; font-weight: 600; text-transform: uppercase; text-align: center; padding: 20px;
         }
-        .image-placeholder span { color: var(--text-dim); font-size: 0.8rem; margin-top: 8px; font-weight: normal; text-transform: none; }
-
-        /* --- DIAGRAMA DE FLUJO INTERNO --- */
-        .flow-diagram {
-            display: flex; flex-direction: column; gap: 20px; margin: 35px 0; background: rgba(2, 6, 23, 0.5); padding: 30px; border-radius: 20px; border: 1px solid var(--border-spec);
-        }
-        .flow-node {
-            background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(255,255,255,0.08); padding: 18px; border-radius: 14px; text-align: center; font-weight: bold; font-size: 1.05rem;
-        }
-        .flow-node.main-node { border-color: var(--danger); color: var(--danger); text-shadow: 0 0 10px var(--danger-glow); }
-        .flow-split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .flow-subnode { background: rgba(30, 41, 59, 0.4); padding: 18px; border-radius: 14px; border-left: 4px solid var(--accent); }
-        .flow-subnode p { font-size: 0.88rem !important; margin: 8px 0 0 0 !important; font-weight: normal; line-height: 1.5; }
-        .flow-arrow { text-align: center; color: var(--text-dim); font-size: 1.3rem; }
+        .modal-img span { color: var(--text-dim); font-size: 0.8rem; margin-top: 6px; font-transform: none; font-weight: normal; }
 
         footer { padding: 40px; text-align: center; color: var(--text-dim); font-size: 0.85rem; border-top: 1px solid var(--border-spec); margin-top: 50px; }
         
-        /* --- RESPONSIVIDAD --- */
-        @media (max-width: 1100px) {
-            .sub-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .sub-grid { grid-template-columns: 1fr; }
-            .flow-split { grid-template-columns: 1fr; }
             .modal-content { padding: 35px 20px; }
             .featured-article { padding: 35px 25px; }
         }
@@ -231,141 +230,101 @@
             <h1>Impacto de la contaminación <br><span>en las playas</span></h1>
         </section>
 
+        <div class="search-container">
+            <div class="filter-tags">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="consejos">Consejos de Limpieza</button>
+                <button class="filter-btn" data-filter="fauna">Animales en Peligro</button>
+            </div>
+            <input type="text" id="blogSearch" class="search-bar" placeholder="Buscar apartados o palabras clave...">
+        </div>
+
         <div class="blog-layout">
             
-            <section class="featured-article" data-id="modal-diagnostico">
-                <span class="tag">Análisis Estructural</span>
-                <h2>Crisis Plástica Costera: El Colapso Silencioso de los Litorales</h2>
-                <p>Las costas del planeta enfrentan una de las mayores crisis de origen antropogénico en la historia moderna. Toneladas de residuos macroplásticos e industriales llegan cada día a nuestras arenas, desatando una degradación sistemática que afecta la geología del suelo, la pureza del agua y la estabilidad financiera de comunidades enteras. Explora el desglose técnico y científico de este vector de destrucción y descubre los pilares urgentes de mitigación propuestos por la economía circular.</p>
-                <span class="read-more">Leer diagnóstico completo →</span>
+            <section class="featured-article" data-id="modal-general" data-tags="general impacto">
+                <span class="main-tag">Tema Central</span>
+                <h2>El Impacto Crítico de la Contaminación en los Litorales</h2>
+                <p>Las playas de todo el mundo se han convertido en los vertederos mecánicos de la actividad humana. Toneladas de plásticos, colillas y desechos químicos destruyen diariamente los ecosistemas costeros, rompiendo el equilibrio ecológico, dañando las dunas y comprometiendo gravemente el futuro del ecosistema marino y costero. Explora el diagnóstico completo haciendo clic aquí.</p>
+                <span class="read-more-btn" style="color: var(--accent);">Ver panorama general →</span>
             </section>
 
-            <section class="sub-grid">
+            <section class="sub-grid" id="blogGrid">
                 
-                <article class="blog-card" data-id="modal-animales">
-                    <span class="tag">Biodiversidad</span>
-                    <h3>Impacto en Animales Marinos y Cadenas Tróficas</h3>
-                    <p>Los polímeros sintéticos introducidos de forma descontrolada alteran la fauna marina a través de tres vectores críticos: la obstrucción gastrointestinal masiva por ingesta directa, los estrangulamientos incidentales y los procesos invisibles de bioacumulación tóxica.</p>
-                    <span class="read-more">Leer artículo completo →</span>
+                <article class="blog-card" data-id="modal-consejos" data-tags="consejos limpiar playas voluntariado">
+                    <div class="card-img-preview">[ Imagen: Voluntariado en Playa ]</div>
+                    <span class="card-tag">Subtema 1</span>
+                    <h3>Consejos para mantener limpias las playas</h3>
+                    <p>Mantener las playas libres de residuos requiere acciones ciudadanas coordinadas y responsables. Explora nuestra guía de acciones prácticas inmediatas, manejo adecuado de residuos personales y organización comunitaria activa.</p>
+                    <span class="read-more-btn">Explorar apartados →</span>
                 </article>
 
-                <article class="blog-card" data-id="modal-agua">
-                    <span class="tag">Calidad del Agua</span>
-                    <h3>Alteración Química y Zonas Muertas de los Litorales</h3>
-                    <p>La contaminación va más allá del impacto estético visible en la arena. La lixiviación de metales pesados, la infiltración de patógenos microbiológicos por descargas urbanas y la eutrofización acelerada destruyen la química del ecosistema marino.</p>
-                    <span class="read-more">Leer artículo completo →</span>
-                </article>
-
-                <article class="blog-card" data-id="modal-turismo">
-                    <span class="tag">Socioeconomía</span>
-                    <h3>Efecto Dominó en la Economía del Turismo Costero</h3>
-                    <p>Los paisajes degradados rompen inmediatamente el valor de los activos naturales de los destinos turísticos. Conoce la pérdida del atractivo estético y los millonarios presupuestos municipales desviados hacia la mitigación y limpieza de playas.</p>
-                    <span class="read-more">Leer artículo completo →</span>
+                <article class="blog-card" data-id="modal-animales" data-tags="fauna animales peligro especies mar">
+                    <div class="card-img-preview">[ Imagen: Fauna Marina Afectada ]</div>
+                    <span class="card-tag">Subtema 2</span>
+                    <h3>Animales marinos en peligro por la contaminación</h3>
+                    <p>La fauna costera y marina se enfrenta a trampas mortales invisibles creadas por residuos industriales. Descubre cuáles son las especies más afectadas y los letales peligros de la ingesta accidental y las redes fantasma.</p>
+                    <span class="read-more-btn">Explorar apartados →</span>
                 </article>
 
             </section>
         </div>
     </main>
 
-    <div class="modal" id="modal-diagnostico">
+    <div class="modal" id="modal-general">
         <div class="modal-content">
             <button class="close-modal">&times;</button>
-            <h2>Un Diagnóstico Ambiental y Socioeconómico de las Costas</h2>
-            <p>La contaminación en las zonas litorales del país ya no representa únicamente un problema de estética visual; se ha consolidado como un vector crítico de degradación ambiental sistémica que altera el balance dinámico costero.</p>
+            <h2>Impacto de la contaminación en las playas</h2>
+            <p>La acumulación de basura en los litorales es una problemática global compleja que acelera la degradación geológica del suelo y compromete la resiliencia climática natural de las costas frente a fenómenos como huracanes y tormentas.</p>
+            <div class="modal-img">
+                [ Imagen de satélite o costera que muestra la acumulación de plásticos en la línea de marea ]
+                <span>Residuos sólidos acumulados por las corrientes marinas en playas turísticas</span>
+            </div>
+            <h4>Un problema sistémico</h4>
+            <p>Los residuos alteran las propiedades de la arena, afectando la flora nativa y los microorganismos básicos del suelo marino. Detener esta crisis requiere combinar esfuerzos urgentes de conservación biológica con metodologías comunitarias eficientes.</p>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-consejos">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h2>Consejos para mantener limpias las playas</h2>
+            <p>El cuidado costero empieza con cambios sencillos pero contundentes en nuestros hábitos cotidianos. Conoce los apartados clave para actuar:</p>
             
-            <div class="image-placeholder">
-                
-                <span>Visualización del impacto del plástico acumulado en las dunas y la pérdida de arena costera</span>
+            <div class="modal-img">
+                [ Imagen informativa detallando contenedores de reciclaje y separación de basura en áreas públicas ]
+                <span>Infografía de gestión de residuos y separación correcta en playas</span>
             </div>
 
-            <h4>El Impacto Geológico y Climático</h4>
-            <p>La acumulación persistente de macroplásticos sobre las dunas playeras modifica la densidad térmica del suelo y compacta la arena de forma artificial, impidiendo el correcto crecimiento de la vegetación halófila nativa. Estas plantas son las encargadas de estabilizar la arena ante la erosión eólica, por lo que su pérdida acelera la desaparición física de la playa ante el aumento del nivel del mar y tormentas tropicales.</p>
-            
-            <h4>Transición hacia la Economía Circular Costera</h4>
-            <p>La recolección manual reactiva resulta insuficiente si los flujos globales de descarte industrial no se detienen en origen. El diagnóstico técnico exige regulaciones estrictas de responsabilidad extendida del productor (REP), la sustitución total de polímeros sintéticos en zonas comerciales playeras y la implementación de sistemas inteligentes basados en datos para coordinar las brigadas voluntarias de limpieza de forma automatizada y eficiente.</p>
+            <h4>Apartado A: Consumo Responsable y Regla de Cero Residuos</h4>
+            <p>Evita por completo llevar plásticos de un solo uso (botellas, platos, popotes y cubiertos desechables) a la zona de playa. Reemplázalos siempre por contenedores reutilizables de acero inoxidable o materiales biodegradables certificados.</p>
+
+            <h4>Apartado B: Recolección y Conservación de Colillas</h4>
+            <p>Las colillas de cigarro son el residuo más frecuente en las costas. Lleva contigo un cenicero portátil o contenedor hermético y jamás las entierres en la arena, ya que liberan metales pesados que contaminan miles de litros de agua.</p>
+
+            <h4>Apartado C: Participación en Brigadas de Limpieza Colectiva</h4>
+            <p>Súmate a las jornadas locales de recolección y monitoreo ciudadano. La limpieza organizada no solo retira basura física, sino que genera datos clave para presionar por mejores políticas públicas ambientales en la región.</p>
         </div>
     </div>
 
     <div class="modal" id="modal-animales">
         <div class="modal-content">
             <button class="close-modal">&times;</button>
-            <h2>Impacto Crítico en la Fauna Marina y Cadenas Tróficas</h2>
-            <p>Los desechos sólidos introducidos de forma descontrolada por la actividad industrial y urbana rompen las cadenas biológicas bajo tres fenómenos patológicos terminales:</p>
-            
-            <h4>1. Ingesta Involuntaria y Bloqueo Gastrointestinal</h4>
-            <p>Especies de alto valor ecológico como las tortugas marinas (Carey y Laúd) confunden las bolsas plásticas translúcidas suspendidas con medusas, su fuente primaria de nutrición. Al ser ingeridas, estos materiales se alojan en el tracto digestivo superior, provocando una flotabilidad positiva artificial que les impide sumergirse para cazar, induciendo una lenta muerte por inanición y desnutrición clínica.</p>
+            <h2>Animales marinos en peligro por la contaminación</h2>
+            <p>Los desechos sólidos introducidos a los litorales impactan de forma devastadora la supervivencia biológica marina:</p>
 
-            <div class="image-placeholder">
-                
-                <span>Diagrama de bioacumulación: transferencia de microplásticos desde el zooplancton hasta depredadores superiores</span>
+            <div class="modal-img">
+                [ Fotografía de tortuga marina o ave costera interactuando erróneamente con desechos plásticos ]
+                <span>Impacto biológico de los macroplásticos en especies costeras protegidas</span>
             </div>
 
-            <h4>2. Enredos, Mutilaciones y Pesca Fantasma</h4>
-            <p>Redes, líneas de nailon y aparejos de pesca comercial perdidos o abandonados en alta mar (redes fantasma) actúan de forma autónoma durante décadas. Al desplazarse por las corrientes costeras, atrapan a mamíferos como delfines mulares y lobos marinos, provocando cortes profundos, necrosis en aletas, infecciones sistémicas severas e imposibilidad absoluta para ascender a la superficie a realizar el intercambio gaseoso pulmonar.</p>
+            <h4>Apartado A: Ingesta Accidental de Macroplásticos</h4>
+            <p>Las tortugas marinas confunden con frecuencia las bolsas plásticas transparentes con medusas. Al tragarlas, sufren obstrucciones severas e inflamación gastrointestinal que les impide sumergirse para cazar, provocando su muerte por desnutrición clínica.</p>
 
-            <h4>3. Fotodegradación y el Peligro Invisible de los Microplásticos</h4>
-            <p>La radiación ultravioleta del sol y el oleaje mecánico fragmentan los plásticos en partículas menores a 5 milímetros. Estos microplásticos actúan como imanes químicos que absorben toxinas circundantes (como bifenilos policlorados y pesticidas). Al ser consumidos por el zooplancton, entran directamente a la red trófica marina, acumulando niveles exponenciales de toxicidad conforme avanzan en la cadena alimenticia hasta alcanzar los alimentos marinos de consumo humano.</p>
-        </div>
-    </div>
+            <h4>Apartado B: Redes Fantasma y Enredos Incidentales</h4>
+            <p>Aparejos y redes de pesca abandonados flotan a la deriva, atrapando a mamíferos como delfines y lobos marinos. Esto restringe permanentemente sus movimientos, provocándoles heridas graves o asfixia al impedirles salir a la superficie a respirar.</p>
 
-    <div class="modal" id="modal-agua">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <h2>Alteración y Degradación de la Calidad del Agua</h2>
-            <p>El agua de mar posee un equilibrio químico y microbiológico sumamente sensible que es vulnerado de forma constante por la introducción de agentes contaminantes artificiales:</p>
-            
-            <h4>1. Lixiviación Química de Residuos</h4>
-            <p>Los macroplásticos en descomposición junto con las colillas de cigarro (constituidas de acetato de celulosa) liberan metales pesados como el cadmio, arsénico, plomo y compuestos orgánicos como los bisfenoles. Una sola colilla contiene suficiente carga tóxica para alterar los parámetros de salubridad e inhibir el desarrollo celular de larvas marinas en un radio de 50 litros de agua salada.</p>
-
-            <div class="image-placeholder">
-                
-                <span>Proceso de eutrofización: crecimiento descontrolado de algas y formación de capas hipóxicas (zonas muertas)</span>
-            </div>
-
-            <h4>2. Vectores de Contaminación Microbiológica</h4>
-            <p>La mala planificación de la infraestructura sanitaria en complejos costeros masificados genera descargas crudas de aguas residuales. Esto dispara la presencia de bacterias patógenas como <em>Escherichia coli</em> y enterococos fecales, alterando el ecosistema, destruyendo el microbioma marino local y obligando al cierre de playas por representar un riesgo inminente de infecciones cutáneas y gastrointestinales en humanos.</p>
-
-            <h4>3. Procesos Nocivos de Eutrofización Costera</h4>
-            <p>El arrastre de materia orgánica, detergentes fosfatados y fertilizantes agrícolas hacia el océano detona la proliferación masiva e hipertrófica de microalgas superficiales. Esta capa vegetal bloquea el paso de la luz solar hacia el fondo marino, impidiendo la fotosíntesis de los pastos marinos. Al morir estas algas, las bacterias descomponedoras consumen todo el oxígeno disuelto en el agua, creando amplias "zonas muertas" de anoxia donde ninguna especie acuática puede sobrevivir.</p>
-        </div>
-    </div>
-
-    <div class="modal" id="modal-turismo">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <h2>Consecuencias Socioeconómicas en el Turismo</h2>
-            <p>La degradación de las condiciones ambientales de los litorales provoca un impacto directo y severo en los motores financieros de las comunidades costeras que dependen del mar:</p>
-
-            <div class="flow-diagram">
-                <div class="flow-node main-node">PLAYA CONTAMINADA</div>
-                <div class="flow-arrow">▼</div>
-                <div class="flow-split">
-                    <div class="flow-subnode">
-                        <strong>【 Impacto Estético 】</strong>
-                        <p>• Pérdida drástica de atractivo visual<br>• Calificaciones negativas y daño reputacional global</p>
-                    </div>
-                    <div class="flow-subnode">
-                        <strong>【 Riesgo Sanitario 】</strong>
-                        <p>• Infecciones y alergias en bañistas<br>• Clausura técnica por alertas epidemiológicas</p>
-                    </div>
-                </div>
-                <div class="flow-arrow">▼</div>
-                <div class="flow-node" style="border-color: var(--accent);">
-                    <strong>【 Colapso Económico Colectivo 】</strong>
-                    <p style="font-size: 0.9rem; color: var(--text-dim); font-weight: normal; margin-top: 5px;">
-                        Caída vertical de la afluencia • Quiebra de comercios y pérdida de empleo • Desviación masiva de presupuestos públicos hacia limpieza municipal
-                    </p>
-                </div>
-            </div>
-            
-            <h4>1. Destrucción del Valor Estético y Reputación Digital</h4>
-            <p>La presencia de basura rompe por completo el valor paisajístico que buscan los visitantes. En la era de la hiperconectividad, las imágenes de costas contaminadas se difunden de forma inmediata en plataformas globales, deteriorando la marca del destino turístico y reduciendo las tasas de retorno de viajeros internacionales a largo plazo.</p>
-
-            <h4>2. Pérdida Directa de Empleos y Decrecimiento Local</h4>
-            <p>Cuando la afluencia de turistas disminuye de manera sostenida, se genera una contracción económica en cadena. Hoteles, restaurantes, cooperativas artesanales y pequeños operadores turísticos experimentan reducciones drásticas en sus márgenes de operación, forzando recortes de personal, aumentando la desocupación local y precarizando las condiciones de vida de la comunidad.</p>
-
-            <h4>3. Desviación de Fondos Públicos hacia la Limpieza Reactiva</h4>
-            <p>Los gobiernos municipales se ven obligados a destinar millones de pesos anuales en la contratación de cuadrillas de limpieza de emergencia y maquinaria pesada para remover los desechos plásticos de la arena de forma superficial. Este presupuesto masivo representa un costo de oportunidad crítico, ya que los fondos públicos son retirados de sectores clave como la infraestructura médica urbana, educación pública o el desarrollo de tecnologías de reciclaje eficientes.</p>
+            <h4>Apartado C: La Amenaza Invisible de los Microplásticos</h4>
+            <p>Por la radiación solar, los plásticos se fragmentan en micropartículas que absorben toxinas del agua. Al ser consumidas por especies pequeñas, los contaminantes químicos viajan por la red trófica, afectando la salud de los grandes depredadores.</p>
         </div>
     </div>
 
@@ -374,8 +333,51 @@
     </footer>
 
     <script>
-        // LÓGICA DE CONTROL DE LAS VENTANAS MODALES INTERACTIVAS
+        // --- LÓGICA DE BÚSQUEDA Y FILTRADO EN TIEMPO REAL ("COMO SI SE PUDIERAN BUSCAR") ---
+        const searchInput = document.getElementById('blogSearch');
+        const filterButtons = document.querySelectorAll('.filter-btn');
         const cards = document.querySelectorAll('.blog-card, .featured-article');
+
+        function filterBlog() {
+            const query = searchInput.value.toLowerCase().trim();
+            const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+
+            cards.forEach(card => {
+                const cardTags = card.getAttribute('data-tags').toLowerCase();
+                const cardTitle = card.querySelector('h2, h3').textContent.toLowerCase();
+                const cardText = card.querySelector('p').textContent.toLowerCase();
+                
+                const matchesSearch = cardTitle.includes(query) || cardText.includes(query) || cardTags.includes(query);
+                
+                let matchesFilter = false;
+                if (activeFilter === 'all') {
+                    matchesFilter = true;
+                } else if (activeFilter === 'consejos' && cardTags.includes('consejos')) {
+                    matchesFilter = true;
+                } else if (activeFilter === 'fauna' && cardTags.includes('fauna')) {
+                    matchesFilter = true;
+                }
+
+                if (matchesSearch && matchesFilter) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Eventos para la barra de búsqueda y botones de filtro
+        searchInput.addEventListener('input', filterBlog);
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                filterBlog();
+            });
+        });
+
+        // --- LÓGICA DE CONTROL DE LAS VENTANAS MODALES ---
         const closeButtons = document.querySelectorAll('.close-modal');
         const modals = document.querySelectorAll('.modal');
 
